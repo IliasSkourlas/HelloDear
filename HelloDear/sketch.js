@@ -12,7 +12,7 @@ function gotDetections(error, results){
         console.error(error);
         fill(250, 50, 0);
         textSize(20);
-        text("oops...refresh please ! ", width - 300, 20)
+        text("oops...refresh please ! ", 640*l + 10, 20)
     }else{
         detections = results;
         detector.detect(webCam, gotDetections);
@@ -22,7 +22,7 @@ function gotDetections(error, results){
 function setup(){
     createCanvas(windowWidth, windowHeight);
     webCam = createCapture(VIDEO);
-    webCam.size(640*l,480*l);
+    webCam.size(640*l,550*l);
     webCam.hide();
     fill(250, 50, 250);
     textSize(50);
@@ -34,7 +34,7 @@ function setup(){
 }
 
 function draw(){
-    image(webCam,0, 0, 640*l, 550*l);
+    image(webCam,0, 0, 640*l, 480*l);
     for (let i = 0; i < detections.length; i++) {
         let object = detections[i];
         stroke(0, 255, 255);
