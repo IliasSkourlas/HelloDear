@@ -2,10 +2,8 @@ let webCam;
 let detector;
 let detections = [];
 let l = 1.9;
+let isLoaded = false;
 
-// function preload(){
-//     detector = ml5.objectDetector('cocossd');
-// }
 function modelLoaded(){
     detector.detect(webCam, gotDetections);
 }
@@ -18,13 +16,13 @@ function gotDetections(error, results){
         textSize(20);
         text("oops...refresh please ! ", 640*l + 10, 20)
     }else{
+        isLoaded = true;
         detections = results;
         detector.detect(webCam, gotDetections);
     }
 }
 
 function setup(){
-    
     createCanvas(windowWidth, windowHeight);
     webCam = createCapture(VIDEO);
     webCam.size(640*l,550*l);
@@ -39,15 +37,17 @@ function setup(){
 function draw(){
     image(webCam,0, 0, 640*l, 480*l);
 
-    for (let i = 0; i < detections.length; i++) {
-        let object = detections[i];
-        stroke(0, 255, 255);
-        strokeWeight(2);
-        noFill();
-        rect(object.x*l, object.y*l, object.width*l, object.height*l+object.height*l/100);
-        fill(0, 250, 0);
-        noStroke();
-        textSize(20);
-        text(object.label, object.x*l + 5, object.y*l + 20);
+    if(isLoaded){
+        for (let i = 0; i < detections.length; i++) {
+            let object = detections[i];
+            stroke(0, 255, 255);
+            strokeWeight(2);
+            noFill();
+            rect(object.x*l, object.y*l, object.width*l, object.height*l+object.height*l/100);
+            fill(0, 250, 0);
+            noStroke();
+            textSize(20);
+            text(object.label, object.x*l + 5, object.y*l + 20);
+        }
     }
 };
