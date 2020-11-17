@@ -40,7 +40,7 @@ function draw(){
         stroke(0, 255, 255);
         strokeWeight(2);
         noFill();
-        rect(object.x*l, object.y*l, object.width*l, object.height*l+object.height*l/7);
+        rect(object.x*l, object.y*l, object.width*l, object.height*l+object.height*l/100);
         fill(0, 250, 0);
         noStroke();
         textSize(20);
